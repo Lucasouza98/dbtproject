@@ -9,7 +9,7 @@ with markup as (
 ), final as (
     select * from {{source('sources','customers')}} where customer_id in (select result from removed)
 )
-select * from final limit 10
+select * from final
 -- source é o arquivo source.yml que é a referencia do DW redshift, o primeiro parametro é do - name: sources do arquivo source.yml e o segundo o nome da tabela. 
 -- este arquivo irá gerar uma tabela sql que passará a ser uma ref.
 --select * from {{source('sources','customers')}}
