@@ -21,5 +21,15 @@ with prod as (
     left join {{ref('customers')}} cs on (ord.customer_id = cs.customer_id)
     left join {{ref('employees')}} em on (ord.employee_id = em.employee_id)
     left join {{source('sources','shippers')}} sh on (ord.ship_via = sh.shipper_id)
+), final_join as (
+    select 
+    od. *,
+    ord.order_date,
+    ord.customer,
+    ord.employee,
+    ord.age,
+    ord.lengthofservice
+    from orddetai od
+    inner join ordrs ord on (od.order_id = ord.order_id)
 )
-select * from ordrs
+select * from final_join
